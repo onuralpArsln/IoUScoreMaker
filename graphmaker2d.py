@@ -1,7 +1,27 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
+
+
 def graph(kernelSize:list,iouScore:list,graphName:str,xname:str = "Kernel Size",yname:str = "iou score"):
+    """
+    Bu fonksiyon verilen data noktaları ile grafik oluşturur ve curve fitting uygular
+    
+    Parameters:
+    kernelSize (list): x eksenine gelecek datalar arrayı, başta kernel size dğiştim ondan adı bu.
+
+    iouScore (list): y eksenine gelecek datalar arrayı, buraya genelde iou score koyulacak
+
+    graphName (string) : grafik adı aynı zamanda sonuç bu isim ile jpg olarak kaydedilecek
+
+    xname (string): x ekseni ismi
+
+    yname (string): y ekseni ismi
+    
+    Returns:
+    void,  bir jpgyi direkt kaydeder
+    """
     x = np.array(kernelSize)
     y = np.array(iouScore)
     p = np.polyfit(x, y, deg=3)
@@ -27,6 +47,10 @@ def graph(kernelSize:list,iouScore:list,graphName:str,xname:str = "Kernel Size",
     plt.show()
 
 
+
+
+
+##bu alt test için 
 if __name__ == "__main__":
     # Sample data (replace these with your data)
     x = np.array([0, 1, 2, 3, 4, 5])
