@@ -38,7 +38,7 @@ input_image = np.expand_dims(input_image, axis=-1)  # Tek bir kanal ekleyerek (2
 
 gaus_kernel_x=5
 gaus_kernel_y=5
-gaus_kernel_std_dev=0
+gaus_kernel_std_dev=-20
 blurred_image = cv2.GaussianBlur(input_image, (gaus_kernel_x, gaus_kernel_y), gaus_kernel_std_dev)
 
 kernelSize=[]
@@ -46,17 +46,17 @@ iouScore=[]
 
 #cv2.imshow('Original Image', input_image)
 
-for i in range(30):
+for i in range(50):
     # use i*2 to keep kernel side length always odd number
     blurred_image = cv2.GaussianBlur(input_image, (gaus_kernel_x, gaus_kernel_y), gaus_kernel_std_dev+i)
-    print(gaus_kernel_x+i*2)
+    sharp_image = cv2.addWeighted(input_image, 1.5, blurred_image, -0.5, 0)
     #cv2.imshow(f'Blurred Image {i}', blurred_image)
     
     # kernel size data collected 
-    kernelSize.append(gaus_kernel_x+i*2)
+    kernelSize.append(gaus_kernel_std_dev+i)
 
     #prediction made
-    prediction_result = model.predict(np.expand_dims(blurred_image, axis=0))
+    prediction_result = model.predict(np.expand_dims(sharp_image, axis=0))
     #prediction tuned into value 
     side_res=prediction_result
     
@@ -68,7 +68,7 @@ for i in range(30):
 
 import graphmaker2d as gmaker
 
-gmaker.graph(kernelSize, iouScore ,"Gaussian Low Pass Standart Deviation - IOU Score" ,xname="Gaussian  Standart Deviation")
+gmaker.graph(kernelSize, iouScore ,"GLP and Laplacian Sharpened - IOU Score" ,xname="Gaussian  Standart Deviation")
 
 
 
