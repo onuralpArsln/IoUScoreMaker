@@ -41,6 +41,9 @@ gaus_kernel_y=1
 gaus_kernel_std_dev=0
 blurred_image = cv2.GaussianBlur(input_image, (gaus_kernel_x, gaus_kernel_y), gaus_kernel_std_dev)
 
+kernelSize=[]
+iouScore=[]
+
 cv2.imshow('Original Image', input_image)
 for i in range(3):
     # use i*2 to keep kernel side length always odd number

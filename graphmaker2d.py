@@ -1,9 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def graph(data1:list,data2:list,graphName:str,xname:str = "Kernel Size",yname:str = "iou score"):
-    x = np.array(data1)
-    y = np.array(data2)
+def graph(kernelSize:list,iouScore:list,graphName:str,xname:str = "Kernel Size",yname:str = "iou score"):
+    x = np.array(kernelSize)
+    y = np.array(iouScore)
     p = np.polyfit(x, y, deg=3)
     x_fit = np.linspace(min(x), max(x), 100)
     y_fit = np.polyval(p, x_fit)
