@@ -26,6 +26,9 @@ plt.title('Curve Fitting')
 # Show legend
 plt.legend()
 
+
+
+plt.savefig('curve_fit_test.jpg', format='jpg')
 # Show plot
 plt.grid(True)
 plt.show()
