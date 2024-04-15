@@ -36,14 +36,15 @@ input_image = np.expand_dims(input_image, axis=-1)  # Tek bir kanal ekleyerek (2
 
 
 
-gaus_kernel_x=5
-gaus_kernel_y=5
+gaus_kernel_x=1
+gaus_kernel_y=1
 gaus_kernel_std_dev=0
 blurred_image = cv2.GaussianBlur(input_image, (gaus_kernel_x, gaus_kernel_y), gaus_kernel_std_dev)
 
 cv2.imshow('Original Image', input_image)
 for i in range(3):
-    blurred_image = cv2.GaussianBlur(input_image, (gaus_kernel_x, gaus_kernel_y), gaus_kernel_std_dev)
+    # use i*2 to keep kernel side length always odd number
+    blurred_image = cv2.GaussianBlur(input_image, (gaus_kernel_x+i*2, gaus_kernel_y+i*2), gaus_kernel_std_dev)
     cv2.imshow(f'Blurred Image {i}', blurred_image)
     
 cv2.waitKey(0)  
