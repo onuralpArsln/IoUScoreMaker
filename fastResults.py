@@ -41,12 +41,12 @@ gaus_kernel_y=5
 gaus_kernel_std_dev=0
 blurred_image = cv2.GaussianBlur(input_image, (gaus_kernel_x, gaus_kernel_y), gaus_kernel_std_dev)
 
-
+cv2.imshow('Original Image', input_image)
 for i in range(10):
-    cv2.imshow('Original Image', input_image)
+    blurred_image = cv2.GaussianBlur(input_image, (gaus_kernel_x+i, gaus_kernel_y+i), gaus_kernel_std_dev+i)
     cv2.imshow('Blurred Image', blurred_image)
-    cv2.waitKey(0)
     
+cv2.waitKey(0)  
 cv2.destroyAllWindows()
 
 # Tahmin yapma
