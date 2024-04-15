@@ -36,43 +36,40 @@ input_image = np.expand_dims(input_image, axis=-1)  # Tek bir kanal ekleyerek (2
 
 
 
-gaus_kernel_x=1
-gaus_kernel_y=1
+gaus_kernel_x=5
+gaus_kernel_y=5
 gaus_kernel_std_dev=0
 blurred_image = cv2.GaussianBlur(input_image, (gaus_kernel_x, gaus_kernel_y), gaus_kernel_std_dev)
 
 kernelSize=[]
 iouScore=[]
 
-cv2.imshow('Original Image', input_image)
-for i in range(3):
+#cv2.imshow('Original Image', input_image)
+
+for i in range(30):
     # use i*2 to keep kernel side length always odd number
-    blurred_image = cv2.GaussianBlur(input_image, (gaus_kernel_x+i*2, gaus_kernel_y+i*2), gaus_kernel_std_dev)
-    cv2.imshow(f'Blurred Image {i}', blurred_image)
+    blurred_image = cv2.GaussianBlur(input_image, (gaus_kernel_x, gaus_kernel_y), gaus_kernel_std_dev+i)
+    print(gaus_kernel_x+i*2)
+    #cv2.imshow(f'Blurred Image {i}', blurred_image)
     
-cv2.waitKey(0)  
-cv2.destroyAllWindows()
+    # kernel size data collected 
+    kernelSize.append(gaus_kernel_x+i*2)
 
-# Tahmin yapma
-prediction_result = model.predict(np.expand_dims(blurred_image, axis=0))
-side_res=prediction_result
-# Numpy dizisini JPEG dosyasına dönüştürme
-output_image_path = 'prediction_result1.jpg'
-prediction_result = (prediction_result * 255).astype(np.uint8)
-cv2.imwrite(output_image_path, prediction_result[0])
+    #prediction made
+    prediction_result = model.predict(np.expand_dims(blurred_image, axis=0))
+    #prediction tuned into value 
+    side_res=prediction_result
+    
+    # calculate iou score
+    iou = iou_score(side_res, input_mask)
+    # iou score added to list
+   
+    iouScore.append(iou.numpy())
 
-# Dönüştürülen JPEG dosyasını siyah beyaz hale getirme
-output_image_gray_path = 'prediction_result.jpg'
-output_image_gray = cv2.imread(output_image_path, cv2.IMREAD_GRAYSCALE)
-cv2.imwrite(output_image_gray_path, output_image_gray)
+import graphmaker2d as gmaker
 
-
-
-
+gmaker.graph(kernelSize, iouScore ,"Gaussian Low Pass Standart Deviation - IOU Score" ,xname="Gaussian  Standart Deviation")
 
 
-reverse_res = prediction_result.astype(np.float32) / 255.0
-iou = iou_score(side_res, input_mask)
 
-# .numpy() makes it only return umber
-print("IoU Score:", iou.numpy())
+    

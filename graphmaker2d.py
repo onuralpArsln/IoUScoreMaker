@@ -14,8 +14,8 @@ def graph(kernelSize:list,iouScore:list,graphName:str,xname:str = "Kernel Size",
     plt.plot(x_fit, y_fit, 'r', label='Fitted curve')
 
     # Set labels and title
-    plt.xlabel('X')
-    plt.ylabel('Y')
+    plt.xlabel(xname)
+    plt.ylabel(yname)
     plt.title(graphName)
 
     # Show legend
