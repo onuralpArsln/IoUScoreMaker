@@ -33,8 +33,17 @@ input_image = cv2.imread(input_image_path, cv2.IMREAD_GRAYSCALE)
 input_image = cv2.resize(input_image, (256, 256))  # Giriş boyutunu (256, 256) olarak yeniden boyutlandırma
 input_image = np.expand_dims(input_image, axis=-1)  # Tek bir kanal ekleyerek (256, 256) boyutunu (256, 256, 1) olarak genişletiyoruz
 
+
+
+
+gaus_kernel_x=5
+gaus_kernel_y=5
+gaus_kernel_std_dev=0
+blurred_image = cv2.GaussianBlur(input_image, (gaus_kernel_x, gaus_kernel_y), gaus_kernel_std_dev)
+
+
 # Tahmin yapma
-prediction_result = model.predict(np.expand_dims(input_image, axis=0))
+prediction_result = model.predict(np.expand_dims(blurred_image, axis=0))
 side_res=prediction_result
 # Numpy dizisini JPEG dosyasına dönüştürme
 output_image_path = 'prediction_result1.jpg'
@@ -54,4 +63,5 @@ cv2.imwrite(output_image_gray_path, output_image_gray)
 reverse_res = prediction_result.astype(np.float32) / 255.0
 iou = iou_score(side_res, input_mask)
 
-print("IoU Score:", iou)
+# .numpy() makes it only return umber
+print("IoU Score:", iou.numpy())
