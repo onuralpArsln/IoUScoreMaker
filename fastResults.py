@@ -42,6 +42,13 @@ gaus_kernel_std_dev=0
 blurred_image = cv2.GaussianBlur(input_image, (gaus_kernel_x, gaus_kernel_y), gaus_kernel_std_dev)
 
 
+for i in range(10):
+    cv2.imshow('Original Image', input_image)
+    cv2.imshow('Blurred Image', blurred_image)
+    cv2.waitKey(0)
+    
+cv2.destroyAllWindows()
+
 # Tahmin yapma
 prediction_result = model.predict(np.expand_dims(blurred_image, axis=0))
 side_res=prediction_result
