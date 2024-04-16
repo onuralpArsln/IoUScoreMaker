@@ -19,13 +19,14 @@ with tf.keras.utils.custom_object_scope({'dice_coef': dice_coef, 'iou_score': io
     model = tf.keras.models.load_model(model_path)
 
 # Giriş resmini uygun boyuta getirme
-input_image_path = 'D:\\linmig\\002.jpg'
+input_image_path = 'D:/linmig/002.jpg'
 input_image = cv2.imread(input_image_path, cv2.IMREAD_GRAYSCALE)
 input_image = cv2.resize(input_image, (256, 256))  # Giriş boyutunu (256, 256) olarak yeniden boyutlandırma
 input_image = np.expand_dims(input_image, axis=-1)  # Tek bir kanal ekleyerek (256, 256) boyutunu (256, 256, 1) olarak genişletiyoruz
 # Tahmin yapma
 prediction_result = model.predict(np.expand_dims(input_image, axis=0))
-mem=prediction_result
+side_res=prediction_result
+
 # Numpy dizisini JPEG dosyasına dönüştürme
 output_image_path = 'prediction_result1.jpg'
 prediction_result = (prediction_result * 255).astype(np.uint8)
@@ -35,18 +36,18 @@ cv2.imwrite(output_image_path, prediction_result[0])
 output_image_gray_path = 'prediction_result.jpg'
 output_image_gray = cv2.imread(output_image_path, cv2.IMREAD_GRAYSCALE)
 cv2.imwrite(output_image_gray_path, output_image_gray)
-cv2.imwrite('D:\\linmig\\002after.jpg', input_image)
 
 
 
+#maske pathi ayarla 
+input_mask_path = 'D:\linmig\mask_002.png'
+input_mask = cv2.imread(input_mask_path, cv2.IMREAD_GRAYSCALE)
+input_mask = cv2.resize(input_mask, (256, 256))
+input_mask = np.expand_dims(input_mask, axis=-1) 
+input_mask = input_mask.astype(np.float32) / 255.0
 
 
-
-
-output_image_gray=tf.image.convert_image_dtype(output_image_gray, dtype=tf.float32)
-iou = iou_score(output_image_gray,output_image_gray)
+reverse_res = prediction_result.astype(np.float32) / 255.0
+iou = iou_score(output_image_gray, input_mask)
 
 print("IoU Score:", iou)
-
-
-##   https://stackoverflow.com/questions/62390059/tensorflow-cannot-compute-addv2-as-input-1zero-based-was-expected-to-be-a-dou
