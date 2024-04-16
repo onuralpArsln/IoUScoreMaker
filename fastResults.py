@@ -73,7 +73,7 @@ for i in range(50):
 
     # iou score agrafik için listeye eklendi .numpy() float almamızı sağlar
     iouScore.append(iou.numpy())
-
+print(iouScore)
 
  ### Burada grafik isimlendirmesi oluyor  graphmaker2d.py dosyasında açıklaması var  ↓↓↓↓↓↓
 gmaker.graph(kernelSize, iouScore ,"GLP and Laplacian Sharpened - IOU Score" ,xname="Gaussian  Standart Deviation")

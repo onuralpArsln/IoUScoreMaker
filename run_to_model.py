@@ -40,13 +40,13 @@ cv2.imwrite(output_image_gray_path, output_image_gray)
 
 #maske pathi ayarla 
 input_mask_path = 'D:/linmig/mask_002.jpg'
-input_mask = cv2.imread(input_image_path, cv2.IMREAD_GRAYSCALE)
+input_mask = cv2.imread(input_mask_path, cv2.IMREAD_GRAYSCALE)
 input_mask = cv2.resize(input_mask, (256, 256))
 input_mask = np.expand_dims(input_mask, axis=-1) 
 input_mask = input_mask.astype(np.float32) / 255.0
 
 
 reverse_res = prediction_result.astype(np.float32) / 255.0
-iou = iou_score(side_res, input_mask)
+iou = iou_score(reverse_res, input_mask)
 
 print("IoU Score:", iou)
