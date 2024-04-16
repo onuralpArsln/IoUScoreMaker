@@ -23,3 +23,15 @@ mask2 = mask2 / 255
 iou_score = calculate_iou(mask1, mask2)
 
 print("IOU score:", iou_score)
+
+
+
+def iou(mask1, mask2):
+    _, mask1 = cv2.threshold(mask1, 128, 255, cv2.THRESH_BINARY)
+    _, mask2 = cv2.threshold(mask2, 128, 255, cv2.THRESH_BINARY)
+    mask1 = mask1 / 255
+    mask2 = mask2 / 255
+    intersection = np.logical_and(mask1, mask2)
+    union = np.logical_or(mask1, mask2)
+    iou_score = np.sum(intersection) / np.sum(union)
+    return iou_score
