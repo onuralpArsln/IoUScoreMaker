@@ -26,22 +26,25 @@ input_image = cv2.imread(input_image_path, cv2.IMREAD_GRAYSCALE)
 input_image = cv2.resize(input_image, (256, 256))  # Giriş boyutunu (256, 256) olarak yeniden boyutlandırma
 input_image = np.expand_dims(input_image, axis=-1)  # Tek bir kanal ekleyerek (256, 256) boyutunu (256, 256, 1) olarak genişletiyoruz
 
-gaus_kernel_x=3
-gaus_kernel_y=3
-gaus_kernel_std_dev=0
+alpha = 0.5  # Contrast control (1.0 means no change)
+beta = 1    # Brightness control (0 means no change)
 kernelSize=[]
 iouScore=[]
 
 
 
-for i in range(50):
+for i in range(40):
     ### Burada Görüntü İşlemeleri Yap ↓↓↓↓↓↓
     # gaus_kerneller her zaman tek sayı olmalı çift sayıda hata verir 
-    blurred_image = cv2.GaussianBlur(input_image, (gaus_kernel_x, gaus_kernel_y), gaus_kernel_std_dev+i)
+
+  
+    adjusted_image = cv2.convertScaleAbs(input_image, alpha=alpha, beta=beta+(0.1*i))
+
+   
     
     ### Burada Görüntü İşlemeleri Yap ^^^^^^^^^^^^^^
     # Tahmin yapma
-    prediction_result = model.predict(np.expand_dims(blurred_image, axis=0))
+    prediction_result = model.predict(np.expand_dims(adjusted_image, axis=0))
     # Numpy dizisini JPEG dosyasına dönüştürme
     output_image_path = 'prediction_resulttemp.jpg'
     prediction_result = (prediction_result * 255).astype(np.uint8)
@@ -53,11 +56,11 @@ for i in range(50):
     #  output_image_gray iou score için hazır boyutlu ve grayscale
 
      # Grafik için data toplama  
-    kernelSize.append(gaus_kernel_std_dev+i)
+    kernelSize.append(beta+(0.1*i))
     iou=calcul.iou(output_image_gray,input_image)
     iouScore.append(iou)
 
 
 ### Burada grafik isimlendirmesi oluyor  graphmaker2d.py dosyasında açıklaması var  ↓↓↓↓↓↓
-gmaker.graph(kernelSize, iouScore ,"GLP - IOU Score normalized outputs Sigma Change while kernel is 11by11" ,xname="Gaussian Standart Dev")
+gmaker.graph(kernelSize, iouScore ,"GLP - IOU Brightnes  beta from 1 " ,xname="brightnes beta")
 
