@@ -31,9 +31,13 @@ sixsth parameter : This is the size of the window for filtering. A larger value 
 be considered when filtering, which can result in smoother output but might lose some details.
 """
 
+blur = cv2.GaussianBlur(dst,(3,3),0)
 
-# Plotting of source and destination image 
-plt.subplot(121), plt.imshow(img) 
-plt.subplot(122), plt.imshow(dst) 
-
-plt.show() 
+cv2.imshow('Original Image', img)
+cv2.imshow('Processed Image', dst)
+cv2.imshow('blurred Image', blur)
+cv2.waitKey(0)  # esc
+cv2.destroyAllWindows()
+cv2.imwrite('./guessed.png', img) 
+cv2.imwrite('./guessedDenoised.png', dst) 
+cv2.imwrite('./guessedDenoisedGaussed.png', blur) 
