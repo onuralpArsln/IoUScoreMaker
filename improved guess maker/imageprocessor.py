@@ -67,5 +67,6 @@ if __name__ == "__main__":
     cv2.imshow('Processed Image', result)
     cv2.imshow('Guessed Image', prediction_result[0])
     cv2.imshow('Guessed  Processed Image', prediction_result2[0])
+    cv2.imwrite('./aiImage.png', prediction_result2[0]) 
     cv2.waitKey(0)
     cv2.destroyAllWindows()
