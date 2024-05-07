@@ -33,6 +33,7 @@ be considered when filtering, which can result in smoother output but might lose
 
 blur = cv2.GaussianBlur(dst,(3,3),0)
 
+
 cv2.imshow('Original Image', img)
 cv2.imshow('Processed Image', dst)
 cv2.imshow('blurred Image', blur)
