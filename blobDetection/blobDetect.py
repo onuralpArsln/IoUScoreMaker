@@ -40,7 +40,7 @@ blobs_log[:, 2] = blobs_log[:, 2] * sqrt(2)
 blobs_dog = blob_dog(image_gray, max_sigma=30, threshold=0.2)
 blobs_dog[:, 2] = blobs_dog[:, 2] * sqrt(2)
 
-blobs_doh = blob_doh(image_gray, max_sigma=30, threshold=0.02)
+blobs_doh = blob_doh(image_gray, max_sigma=30, threshold=0.015)
 
 blobs_list = [blobs_log, blobs_dog, blobs_doh]
 colors = ['yellow', 'lime', 'red']
