@@ -60,4 +60,5 @@ for idx, (blobs, color, title) in enumerate(sequence):
     ax[idx].set_axis_off()
 
 plt.tight_layout()
+plt.savefig("gDBBranchDetected.png")
 plt.show()
