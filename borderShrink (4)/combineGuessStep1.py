@@ -9,6 +9,8 @@ Plan:
 2- binarized not processed guess
 3- combine both binarized to fill in blanks 
 
+to do:
+clearn borders of guessed denoised 
 """
 
 def binarize_image(image_path, threshold_value):
