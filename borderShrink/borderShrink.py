@@ -26,10 +26,32 @@ threshold_value = 127  # Adjust this threshold value as needed
 image_path = 'guessedDenoisedGaussed.png'
 binary_image = binarize_image(image_path, threshold_value)
 # old guess
-image_path = 'prediction_result1.jpg'
-binary_image2 = binarize_image(image_path, threshold_value)
+image_path2 = 'prediction_result1.jpg'
+binary_image2 = binarize_image(image_path2, threshold_value)
 
 
-# Save the binary image
+# Save the binary images
 cv2.imwrite('binary_image.jpg', binary_image)
 cv2.imwrite('binary_image2.jpg', binary_image2)
+
+
+# combine images
+
+def combine_images(image1_path, image2_path, output_path, alpha=0.5):
+    # Load images
+    image1 = cv2.imread(image1_path)
+    image2 = cv2.imread(image2_path)
+    
+    # Resize images to have the same dimensions (optional)
+    image2 = cv2.resize(image2, (image1.shape[1], image1.shape[0]))
+    
+    # Blend images
+    blended_image = cv2.addWeighted(image1, alpha, image2, 1 - alpha, 0)
+    
+    # Save the blended image
+    cv2.imwrite(output_path, blended_image)
+
+# Example usage
+
+output_path = 'blended_image.jpg'
+combine_images('binary_image.jpg', 'binary_image2.jpg', output_path, alpha=0.5)
