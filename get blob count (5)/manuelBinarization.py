@@ -13,3 +13,9 @@ def binarize_image(image_path, threshold_value):
     return binary_image
 
 threshold_value = 127  # Adjust this threshold value as needed
+
+image_path = 'prediction_result1.jpg'
+if __name__ == "__main__":
+    binary_image = binarize_image(image_path, threshold_value)
+    cv2.imwrite('binarizedDefaultGuess.jpg', binary_image)
+
