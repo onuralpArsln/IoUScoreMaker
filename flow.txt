@@ -4,6 +4,8 @@ from file 2
 get regular guess and improved guess
 regular guess : just use prediction
 improved guess : image process and then guess 
+it saved as guessedDenoisedGaussed but 
+in many places i just  gdg.png same but short name
 
 
 
