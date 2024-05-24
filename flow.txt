@@ -23,3 +23,9 @@ step 3
 from file 5 
 use manuel binarization on regular guess to get blobs
 use pixelCounter for blob location and pixel count
+
+step 4
+-------------------------------
+from file 6
+use manuel binarized regular guess and developed guessed denoised gauseed image
+for branch detection
