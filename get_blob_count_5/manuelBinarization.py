@@ -1,4 +1,5 @@
 # manually binarization of colored guess image  results the 
+# binarized gues is  output of this file 
 
 import cv2
 
