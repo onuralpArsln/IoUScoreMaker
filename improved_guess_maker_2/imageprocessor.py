@@ -5,11 +5,6 @@ import cv2
 import numpy as np
 import tensorflow as tf
 
-
-
-
-
-
 def imgProces( img : np.ndarray) -> np.ndarray:
     alpha = 0.4  # Contrast control (1.0 means no change)
     beta = 2.4    # Brightness control (0 means no change)

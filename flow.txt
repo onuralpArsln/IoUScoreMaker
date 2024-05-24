@@ -1,0 +1,23 @@
+Step1
+-------------------------------
+from file 2
+get regular guess and improved guess
+regular guess : just use prediction
+improved guess : image process and then guess 
+
+
+
+
+Step2
+-------------------------------
+from file 3 
+use color denoise to get  clered improve gues 
+guessedDenoisedGaussed.png
+
+
+
+step 3
+-------------------------------
+from file 5 
+use manuel binarization on regular guess to get blobs
+use pixelCounter for blob location and pixel count
