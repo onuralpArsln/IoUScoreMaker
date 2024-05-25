@@ -41,7 +41,9 @@ kernel = np.ones((3, 3), np.uint8)
 # Perform erosion followed by dilation
 result = cv2.erode(result, kernel, iterations=1)
 
+cv2.imwrite('branches_detected.png', result)
 # Display the result
 cv2.imshow('Subtracted Image', result)
 cv2.waitKey(0)
+
 cv2.destroyAllWindows()
