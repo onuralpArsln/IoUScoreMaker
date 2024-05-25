@@ -5,9 +5,9 @@ import graphmaker2d as gmaker
 
 
 ### dosya yolları 
-maskPath = 'D:\linmig\mask_002.png'
-modPath = 'D:\\linmig\\best_model.hdf5'
-inputPath = 'D:/linmig/002.jpg'
+maskPath = 'C:\\Users\\onura\\Documents\\VSproject\\linmig\\initialWork_1\\mask_002.png'
+modPath = 'C:\\Users\\onura\\Documents\\VSproject\\linmig\\initialWork_1\\best_model.hdf5'
+inputPath = 'C:\\Users\\onura\\Documents\\VSproject\\linmig\\initialWork_1\\002.jpg'
 
 
 

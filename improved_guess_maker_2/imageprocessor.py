@@ -13,14 +13,14 @@ def imgProces( img : np.ndarray) -> np.ndarray:
   
 # test part 
 if __name__ == "__main__":
-    input_image_path = 'C:\\Users\\onura\\Documents\\VSproject\linmig\\002.jpg'
+    input_image_path = 'C:\\Users\\onura\\Documents\\VSproject\\linmig\\improved_guess_maker_2\\002.jpg'
     input_image = cv2.imread(input_image_path, cv2.IMREAD_GRAYSCALE)
     input_image = cv2.resize(input_image, (256, 256))  # Giriş boyutunu (256, 256) olarak yeniden boyutlandırma
     input_image = np.expand_dims(input_image, axis=-1)  # Tek bir kanal ekleyerek (256, 256) boyutunu (256, 256, 1) olarak genişletiyoruz
 
     result = imgProces(input_image)
 
-    result_path = 'prediction_result.jpg'
+    result_path = 'C:\\Users\\onura\\Documents\\VSproject\\linmig\\improved_guess_maker_2\\002res.jpg'
     result = cv2.imread(result_path, cv2.IMREAD_GRAYSCALE)
     cv2.imwrite(result_path, result)
 

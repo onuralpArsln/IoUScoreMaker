@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import tensorflow as tf
+from tensorflow.keras.layers import Conv2DTranspose
 
 # Özel metrik fonksiyonları tanımlama
 def dice_coef(y_true, y_pred):
@@ -15,11 +16,11 @@ def iou_score(y_true, y_pred):
 
 # Modeli yükleme sırasında özel metrik fonksiyonları tanımlama
 with tf.keras.utils.custom_object_scope({'dice_coef': dice_coef, 'iou_score': iou_score}):
-    model_path = 'D:\\linmig\\best_model.hdf5'
+    model_path = 'C:\\Users\\onura\\Documents\\VSproject\\linmig\\initialWork_1\\best_model.hdf5'
     model = tf.keras.models.load_model(model_path)
 
 # Giriş resmini uygun boyuta getirme
-input_image_path = 'D:/linmig/002.jpg'
+input_image_path = "C:\\Users\\onura\\Documents\\VSproject\\linmig\\initialWork_1\\002.jpg"
 input_image = cv2.imread(input_image_path, cv2.IMREAD_GRAYSCALE)
 input_image = cv2.resize(input_image, (256, 256))  # Giriş boyutunu (256, 256) olarak yeniden boyutlandırma
 input_image = np.expand_dims(input_image, axis=-1)  # Tek bir kanal ekleyerek (256, 256) boyutunu (256, 256, 1) olarak genişletiyoruz
@@ -40,7 +41,7 @@ cv2.imwrite(output_image_gray_path, output_image_gray)
 
 
 #maske pathi ayarla 
-input_mask_path = 'D:\linmig\mask_002.png'
+input_mask_path = 'C:\\Users\\onura\\Documents\\VSproject\\linmig\\initialWork_1\\mask_002.png'
 input_mask = cv2.imread(input_mask_path, cv2.IMREAD_GRAYSCALE)
 input_mask = cv2.resize(input_mask, (256, 256))
 input_mask = np.expand_dims(input_mask, axis=-1) 

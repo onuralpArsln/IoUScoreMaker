@@ -15,7 +15,7 @@ def iou_score(y_true, y_pred):
 
 # Modeli yükleme sırasında özel metrik fonksiyonları tanımlama
 with tf.keras.utils.custom_object_scope({'dice_coef': dice_coef, 'iou_score': iou_score}):
-    model_path = 'D:\\linmig\\best_model.hdf5'
+    model_path = 'C:\\Users\\onura\\Documents\\VSproject\\linmig\\initialWork_1\\best_model.hdf5'
     model = tf.keras.models.load_model(model_path)
 
 # Giriş resmini uygun boyuta getirme
