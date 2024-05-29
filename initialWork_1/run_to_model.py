@@ -19,7 +19,7 @@ with tf.keras.utils.custom_object_scope({'dice_coef': dice_coef, 'iou_score': io
     model = tf.keras.models.load_model(model_path)
 
 # Giriş resmini uygun boyuta getirme
-input_image_path = 'D:\\linmig\\002.jpg'
+input_image_path = 'C:\\Users\\onura\\Documents\\VSproject\\linmig\\initialWork_1\\002.jpg'
 input_image = cv2.imread(input_image_path, cv2.IMREAD_GRAYSCALE)
 input_image = cv2.resize(input_image, (256, 256))  # Giriş boyutunu (256, 256) olarak yeniden boyutlandırma
 input_image = np.expand_dims(input_image, axis=-1)  # Tek bir kanal ekleyerek (256, 256) boyutunu (256, 256, 1) olarak genişletiyoruz
